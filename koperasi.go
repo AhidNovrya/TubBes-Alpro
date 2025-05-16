@@ -1,5 +1,6 @@
 package main
 
+//apa njing
 import "fmt"
 
 const NMAX int = 100
