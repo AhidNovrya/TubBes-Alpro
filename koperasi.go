@@ -261,3 +261,6 @@ func konfirmasi() bool {
 	}
 	return k
 }
+
+
+// calon fitur baru
