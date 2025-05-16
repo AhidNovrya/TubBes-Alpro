@@ -1,6 +1,5 @@
 package main
 
-//apa njing
 import "fmt"
 
 const NMAX int = 100
@@ -262,3 +261,6 @@ func konfirmasi() bool {
 	}
 	return k
 }
+
+
+// calon fitur baru
