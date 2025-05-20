@@ -18,7 +18,8 @@ type data struct {
 }
 type dataTransaksi [NMAX]data
 
-// Func Utama
+// Fungsi utama
+// Program ini adalah aplikasi sederhana untuk mengelola data transaksi koperasi
 func main() {
 	var pilihan, jumlahData, idx int
 	var A dataTransaksi
@@ -60,6 +61,7 @@ func menu() { // Tampilan interaktif
 	fmt.Print("Pilih (1/2/3/4/5/6/7)? ")
 }
 
+// Fungsi untuk membersihkan layar
 func clearScreen() {
 	var cmd *exec.Cmd
 	if runtime.GOOS == "windows" {
@@ -71,6 +73,8 @@ func clearScreen() {
 	cmd.Run()
 }
 
+// Fungsi untuk menunggu input dari pengguna sebelum melanjutkan
+// Ini digunakan untuk memberikan jeda sebelum kembali ke menu utama
 func jeda() {
 	fmt.Println("Tekan Enter untuk kembali ke menu...")
 	reader := bufio.NewReader(os.Stdin)
@@ -78,7 +82,8 @@ func jeda() {
 	reader.ReadString('\n')
 }
 
-// Func baca
+// Fungsi untuk membaca data transaksi dari pengguna
+// Data yang dimasukkan adalah nama barang, jumlah, dan total harga
 func baca(A *dataTransaksi, jumlahData *int) {
 	var namaBarang string
 	var jumlah, totalHarga int
@@ -102,7 +107,7 @@ func baca(A *dataTransaksi, jumlahData *int) {
 	fmt.Println()
 }
 
-// Func Cetak
+// fungsi untuk mencetak header dan footer tabel
 func headingTable() {
 	fmt.Println("╔══════════════╦══════════════╦════════╦═════════════╗")
 	fmt.Printf("║ %-12s ║ %-12s ║ %-6s ║ %-11s ║\n", "ID Transaksi", "Nama Barang", "Jumlah", "Total Harga")
@@ -113,10 +118,12 @@ func footerTable() {
 	fmt.Println("╚══════════════════════════════════════╩═════════════╝")
 }
 
+// fungsi untuk mencetak data transaksi
 func cetak(A dataTransaksi, i int) {
 	fmt.Printf("║ %-12s ║ %-12s ║ %-6d ║ %-11d ║\n", A[i].idTransaksi, A[i].namaBarang, A[i].jumlah, A[i].totalHarga)
 }
 
+// fungsi untuk mencetak semua data transaksi
 func cetakData(A dataTransaksi, jumlahData int) {
 	clearScreen()
 	headingTable()
@@ -129,11 +136,15 @@ func cetakData(A dataTransaksi, jumlahData int) {
 	fmt.Println()
 }
 
+// fungsi untuk mencetak total nilai transaksi
+// total nilai transaksi dihitung dengan menjumlahkan total harga dari semua data transaksi
 func cetakTotalNilaiTransaksi(A dataTransaksi, jumlahData int) {
 	fmt.Println("╠══════════════╩══════════════╩════════╬═════════════╣")
 	fmt.Printf("║ %-36s ║ %-11d ║\n", "Total Nilai Transaksi", totalNilaiTransaksi(A, jumlahData))
 }
 
+// fungsi untuk menghitung total nilai transaksi
+// total nilai transaksi dihitung dengan menjumlahkan total harga dari semua data transaksi
 func totalNilaiTransaksi(A dataTransaksi, jumlahData int) int {
 	var total int
 	for i := 0; i < jumlahData; i++ {
@@ -142,7 +153,7 @@ func totalNilaiTransaksi(A dataTransaksi, jumlahData int) int {
 	return total
 }
 
-// Func Cari
+// Fungsi untuk mencari data transaksi berdasarkan ID transaksi atau nama barang
 func search(A *dataTransaksi, jumlahData, i *int) {
 	var pilihan int
 
@@ -161,6 +172,7 @@ func search(A *dataTransaksi, jumlahData, i *int) {
 	}
 }
 
+// Fungsi untuk menampilkan menu pencarian
 func menuSearch() {
 	fmt.Println("╔════════════════════════════════════════════════════╗")
 	fmt.Println("║                     S E A R C H                    ║")
@@ -172,6 +184,8 @@ func menuSearch() {
 	fmt.Print("Pilih (1/2/3)? ")
 }
 
+// Fungsi untuk mencari data transaksi berdasarkan ID transaksi
+// ID transaksi yang dicari dimasukkan oleh pengguna
 func cariIdTransaksi(A *dataTransaksi, jumlahData, i *int) {
 	var n string
 
@@ -194,6 +208,8 @@ func cariIdTransaksi(A *dataTransaksi, jumlahData, i *int) {
 	fmt.Println()
 }
 
+// Fungsi untuk mencari indeks data transaksi berdasarkan ID transaksi
+// Fungsi ini menggunakan binary search untuk mencari ID transaksi
 func searchIdx(A dataTransaksi, jD int, n string) int {
 	var low, mid, high, idx int
 
@@ -214,6 +230,9 @@ func searchIdx(A dataTransaksi, jD int, n string) int {
 	return idx
 }
 
+// Fungsi untuk mencari data transaksi berdasarkan nama barang
+// Nama barang yang dicari dimasukkan oleh pengguna
+// Fungsi ini menggunakan sequential search untuk mencari nama barang
 func cariNamaBarang(A *dataTransaksi, jumlahData *int) {
 	var n string
 	var ketemu bool = false
@@ -240,6 +259,7 @@ func cariNamaBarang(A *dataTransaksi, jumlahData *int) {
 	fmt.Println()
 }
 
+// Fungsi untuk mengedit data transaksi
 func editData(A *dataTransaksi, jumlahData, idx *int) {
 	var namaBarang string
 	var jumlah, totalHarga int
@@ -259,6 +279,7 @@ func editData(A *dataTransaksi, jumlahData, idx *int) {
 	fmt.Println()
 }
 
+// Fungsi untuk menghapus data transaksi
 func hapus(A *dataTransaksi, jumlahData, idx *int) {
 	cariIdTransaksi(A, jumlahData, idx)
 	if *idx > -1 && konfirmasi() == true {
@@ -274,7 +295,7 @@ func hapus(A *dataTransaksi, jumlahData, idx *int) {
 	fmt.Println()
 }
 
-// Func Reset
+// Fungsi untuk menghapus semua data transaksi (reset)
 func reset(A *dataTransaksi, jumlahData *int) {
 	fmt.Println("Data yang akan dihapus: ")
 	cetakData(*A, *jumlahData)
@@ -293,6 +314,7 @@ func reset(A *dataTransaksi, jumlahData *int) {
 	fmt.Println()
 }
 
+// Fungsi untuk menampilkan menu konfirmasi
 func konfirmasi() bool {
 	var pilihan string
 	var k bool = false
