@@ -102,7 +102,7 @@ func cetakData(A dataTransaksi, jumlahData int) {
 
 func cetakTotalNilaiTransaksi(A dataTransaksi, jumlahData int) {
 	fmt.Println("╠══════════════╩══════════════╩════════╬═════════════╣")
-	fmt.Printf("| %-36s | %-11d |\n", "Total Nilai Transaksi", totalNilaiTransaksi(A, jumlahData))
+	fmt.Printf("║ %-36s ║ %-11d ║\n", "Total Nilai Transaksi", totalNilaiTransaksi(A, jumlahData))
 }
 
 func totalNilaiTransaksi(A dataTransaksi, jumlahData int) int {
