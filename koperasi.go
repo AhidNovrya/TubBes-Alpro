@@ -39,17 +39,17 @@ func main() {
 }
 
 func menu() { // Tampilan interaktif
-	fmt.Println("+-------------------------+")
-	fmt.Println("|     K O P E R A S I     |")
-	fmt.Println("|-------------------------|")
-	fmt.Println("| 1. Input Data Transaksi |")
-	fmt.Println("| 2. Cetak Data Transaksi |")
-	fmt.Println("| 3. Search               |")
-	fmt.Println("| 4. Edit Data            |")
-	fmt.Println("| 5. Hapus Data           |")
-	fmt.Println("| 6. Reset Data           |")
-	fmt.Println("| 7. Exit                 |")
-	fmt.Println("+-------------------------+")
+	fmt.Println("╔════════════════════════════════════════════════════╗")
+	fmt.Println("║                  K O P E R A S I                   ║")
+	fmt.Println("╠════════════════════════════════════════════════════╣")
+	fmt.Println("║      1. Input Data Transaksi                       ║")
+	fmt.Println("║      2. Cetak Data Transaksi                       ║")
+	fmt.Println("║      3. Search                                     ║")
+	fmt.Println("║      4. Edit Data                                  ║")
+	fmt.Println("║      5. Hapus Data                                 ║")
+	fmt.Println("║      6. Reset Data                                 ║")
+	fmt.Println("║      7. Exit                                       ║")
+	fmt.Println("╚════════════════════════════════════════════════════╝")
 	fmt.Print("Pilih (1/2/3/4/5/6/7)? ")
 }
 
@@ -77,13 +77,13 @@ func baca(A *dataTransaksi, jumlahData *int) {
 
 //Func Cetak
 func headingTable() {
-	fmt.Println("+----------------------------------------------------+")
-	fmt.Printf("| %-12s | %-12s | %-6s | %-11s |\n", "ID Transaksi", "Nama Barang", "Jumlah", "Total Harga")
-	fmt.Println("|--------------|--------------|--------|-------------|")
+	fmt.Println("╔══════════════╦══════════════╦════════╦═════════════╗")
+	fmt.Printf("║ %-12s ║ %-12s ║ %-6s ║ %-11s ║\n", "ID Transaksi", "Nama Barang", "Jumlah", "Total Harga")
+	fmt.Println("╠══════════════╬══════════════╬════════╬═════════════╣")
 }
 
 func footerTable() {
-	fmt.Println("+----------------------------------------------------+")
+	fmt.Println("╚══════════════════════════════════════╩═════════════╝")
 }
 
 func cetak(A dataTransaksi, i int) {
@@ -95,10 +95,14 @@ func cetakData(A dataTransaksi, jumlahData int) {
 	for i := 0; i < jumlahData; i++ {
 		cetak(A, i)
 	}
-	fmt.Println("|--------------------------------------|-------------|")
-	fmt.Printf("| %-36s | %-11d |\n", "Total Nilai Transaksi", totalNilaiTransaksi(A, jumlahData))
+	cetakTotalNilaiTransaksi(A, jumlahData)
 	footerTable()
 	fmt.Println()
+}
+
+func cetakTotalNilaiTransaksi(A dataTransaksi, jumlahData int) {
+	fmt.Println("╠══════════════╩══════════════╩════════╬═════════════╣")
+	fmt.Printf("| %-36s | %-11d |\n", "Total Nilai Transaksi", totalNilaiTransaksi(A, jumlahData))
 }
 
 func totalNilaiTransaksi(A dataTransaksi, jumlahData int) int {
@@ -127,13 +131,13 @@ func search(A *dataTransaksi, jumlahData, i *int) {
 }
 
 func menuSearch() {
-	fmt.Println("+-----------------------------+")
-	fmt.Println("|         S E A R C H         |")
-	fmt.Println("|-----------------------------|")
-	fmt.Println("| 1. Berdasarkan ID Transaksi |")
-	fmt.Println("| 2. Berdasarkan Nama Barang  |")
-	fmt.Println("| 3. Exit                     |")
-	fmt.Println("+-----------------------------+")
+	fmt.Println("╔════════════════════════════════════════════════════╗")
+	fmt.Println("║                     S E A R C H                    ║")
+	fmt.Println("╠════════════════════════════════════════════════════╣")
+	fmt.Println("║      1. Berdasarkan ID Transaksi                   ║")
+	fmt.Println("║      2. Berdasarkan Nama Barang                    ║")
+	fmt.Println("║      3. Exit                                       ║")
+	fmt.Println("╚════════════════════════════════════════════════════╝")
 	fmt.Print("Pilih (1/2/3)? ")
 }
 
@@ -261,6 +265,5 @@ func konfirmasi() bool {
 	}
 	return k
 }
-
 
 // calon fitur baru
