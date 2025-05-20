@@ -1,6 +1,12 @@
 package main
 
-import "fmt"
+import (
+	"bufio"
+	"fmt"
+	"os"
+	"os/exec"
+	"runtime"
+)
 
 const NMAX int = 100
 
@@ -12,12 +18,13 @@ type data struct {
 }
 type dataTransaksi [NMAX]data
 
-//Func Utama
+// Func Utama
 func main() {
 	var pilihan, jumlahData, idx int
 	var A dataTransaksi
 
 	for pilihan < 7 {
+		clearScreen()
 		menu()
 		fmt.Scan(&pilihan)
 		fmt.Println()
@@ -53,7 +60,25 @@ func menu() { // Tampilan interaktif
 	fmt.Print("Pilih (1/2/3/4/5/6/7)? ")
 }
 
-//Func baca
+func clearScreen() {
+	var cmd *exec.Cmd
+	if runtime.GOOS == "windows" {
+		cmd = exec.Command("cmd", "/c", "cls")
+	} else {
+		cmd = exec.Command("clear")
+	}
+	cmd.Stdout = os.Stdout
+	cmd.Run()
+}
+
+func jeda() {
+	fmt.Println("Tekan Enter untuk kembali ke menu...")
+	reader := bufio.NewReader(os.Stdin)
+	reader.ReadString('\n')
+	reader.ReadString('\n')
+}
+
+// Func baca
 func baca(A *dataTransaksi, jumlahData *int) {
 	var namaBarang string
 	var jumlah, totalHarga int
@@ -72,10 +97,12 @@ func baca(A *dataTransaksi, jumlahData *int) {
 			*jumlahData++
 		}
 	}
+	fmt.Println("\033[32mData sudah berhasil diinput\033[0m")
+	jeda()
 	fmt.Println()
 }
 
-//Func Cetak
+// Func Cetak
 func headingTable() {
 	fmt.Println("╔══════════════╦══════════════╦════════╦═════════════╗")
 	fmt.Printf("║ %-12s ║ %-12s ║ %-6s ║ %-11s ║\n", "ID Transaksi", "Nama Barang", "Jumlah", "Total Harga")
@@ -87,16 +114,18 @@ func footerTable() {
 }
 
 func cetak(A dataTransaksi, i int) {
-	fmt.Printf("| %-12s | %-12s | %-6d | %-11d |\n", A[i].idTransaksi, A[i].namaBarang, A[i].jumlah, A[i].totalHarga)
+	fmt.Printf("║ %-12s ║ %-12s ║ %-6d ║ %-11d ║\n", A[i].idTransaksi, A[i].namaBarang, A[i].jumlah, A[i].totalHarga)
 }
 
 func cetakData(A dataTransaksi, jumlahData int) {
+	clearScreen()
 	headingTable()
 	for i := 0; i < jumlahData; i++ {
 		cetak(A, i)
 	}
 	cetakTotalNilaiTransaksi(A, jumlahData)
 	footerTable()
+	jeda()
 	fmt.Println()
 }
 
@@ -113,17 +142,19 @@ func totalNilaiTransaksi(A dataTransaksi, jumlahData int) int {
 	return total
 }
 
-//Func Cari
+// Func Cari
 func search(A *dataTransaksi, jumlahData, i *int) {
 	var pilihan int
 
 	for pilihan < 3 {
+		clearScreen()
 		menuSearch()
 		fmt.Scan(&pilihan)
 		fmt.Println()
 		switch pilihan {
 		case 1:
 			cariIdTransaksi(A, jumlahData, i)
+			jeda()
 		case 2:
 			cariNamaBarang(A, jumlahData)
 		}
@@ -151,13 +182,14 @@ func cariIdTransaksi(A *dataTransaksi, jumlahData, i *int) {
 	*i = searchIdx(*A, *jumlahData, n)
 
 	if *i > -1 {
+		fmt.Println("\033[32mData ditemukan..\033[0m")
 		headingTable()
 		cetak(*A, *i)
 		footerTable()
 		ketemu = true
 	}
 	if !ketemu {
-		fmt.Println("Maaf, data tidak ditemukan")
+		fmt.Println("\033[31mMaaf, data tidak ditemukan\033[0m")
 	}
 	fmt.Println()
 }
@@ -188,18 +220,23 @@ func cariNamaBarang(A *dataTransaksi, jumlahData *int) {
 	fmt.Print("Masukan Nama Barang (contoh: Tempat_Pensil): ")
 	fmt.Scan(&n)
 
-	headingTable()
 	for i := 0; i < *jumlahData; i++ {
 		if n == A[i].namaBarang {
+			if !ketemu {
+				fmt.Println("\033[32mData ditemukan..\033[0m")
+				headingTable()
+			}
 			cetak(*A, *jumlahData)
 			ketemu = true
 		}
 	}
-	footerTable()
 
-	if !ketemu {
-		fmt.Println("Maaf, data tidak ditemukan")
+	if ketemu {
+		footerTable()
+	} else {
+		fmt.Println("\033[31mMaaf, data tidak ditemukan\033[0m")
 	}
+	jeda()
 	fmt.Println()
 }
 
@@ -215,10 +252,11 @@ func editData(A *dataTransaksi, jumlahData, idx *int) {
 			A[*idx].namaBarang = namaBarang
 			A[*idx].jumlah = jumlah
 			A[*idx].totalHarga = totalHarga
-			fmt.Printf("Data ke %d sudah berhasil di edit\n", *idx+1)
-			fmt.Println()
+			fmt.Printf("\033[32mData ke %d sudah berhasil di edit\n\033[0m", *idx+1)
 		}
 	}
+	jeda()
+	fmt.Println()
 }
 
 func hapus(A *dataTransaksi, jumlahData, idx *int) {
@@ -230,12 +268,13 @@ func hapus(A *dataTransaksi, jumlahData, idx *int) {
 		A[*jumlahData-1] = data{}
 
 		*jumlahData--
-		fmt.Printf("Data ke %d sudah terhapus\n", *idx+1)
-		fmt.Println()
+		fmt.Printf("\033[32mData ke %d sudah terhapus\n\033[0m", *idx+1)
 	}
+	jeda()
+	fmt.Println()
 }
 
-//Func Reset
+// Func Reset
 func reset(A *dataTransaksi, jumlahData *int) {
 	fmt.Println("Data yang akan dihapus: ")
 	cetakData(*A, *jumlahData)
@@ -248,15 +287,16 @@ func reset(A *dataTransaksi, jumlahData *int) {
 			A[i].totalHarga = 0
 		}
 		*jumlahData = 0
-		fmt.Println("Semua data sudah terhapus")
-		fmt.Println()
+		fmt.Println("\033[32mSemua data sudah terhapus\033[0m")
 	}
+	jeda()
+	fmt.Println()
 }
 
 func konfirmasi() bool {
 	var pilihan string
 	var k bool = false
-	fmt.Print("Apakah anda yakin akan mengedit atau menghapus data ini? (y/n)")
+	fmt.Print("\033[33mApakah anda yakin akan mengedit atau menghapus data ini? (y/n)\033[0m")
 	fmt.Scan(&pilihan)
 	fmt.Println()
 
