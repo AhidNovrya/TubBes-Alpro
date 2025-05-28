@@ -33,7 +33,7 @@ func main() {
 		case 1:
 			baca(&A, &jumlahData)
 		case 2:
-			cetakData(A, jumlahData)
+			cetakMenu(A, jumlahData)
 		case 3:
 			search(&A, &jumlahData, &idx)
 		case 4:
@@ -94,17 +94,52 @@ func baca(A *dataTransaksi, jumlahData *int) {
 		fmt.Scan(&namaBarang, &jumlah, &totalHarga)
 		if namaBarang == "0" && jumlah == 0 && totalHarga == 0 {
 			stop = true
-		} else {
-			A[*jumlahData].idTransaksi = fmt.Sprintf("KOP%04d", *jumlahData+1) // penginputan id transaksi dilakukan secara otomatis
+		} else if jumlah > 0 || totalHarga > 0 {
+			A[*jumlahData].idTransaksi = fmt.Sprintf("KOP%02d", *jumlahData+1) // penginputan id transaksi dilakukan secara otomatis
 			A[*jumlahData].namaBarang = namaBarang
 			A[*jumlahData].jumlah = jumlah
 			A[*jumlahData].totalHarga = totalHarga
 			*jumlahData++
+		} else {
+			fmt.Println("\033[31mJumlah dan total harga tidak boleh kurang dari 0\033[0m")
 		}
 	}
 	fmt.Println("\033[32mData sudah berhasil diinput\033[0m")
 	jeda()
 	fmt.Println()
+}
+
+// Fungsi untuk menampilkan menu cetak
+func cetakMenu(A dataTransaksi, jumlahData int) {
+	var pilihan int
+	menuCetak()
+	fmt.Scan(&pilihan)
+	for pilihan < 4 {
+		clearScreen()
+		menuCetak()
+		fmt.Scan(&pilihan)
+		fmt.Println()
+		switch pilihan {
+		case 1:
+			cetakData(A, jumlahData)
+		case 2:
+			terurutMenurun(A, jumlahData)
+		case 3:
+			terurutMenaik(A, jumlahData)
+		}
+	}
+}
+
+func menuCetak() {
+	fmt.Println("╔════════════════════════════════════════════════════╗")
+	fmt.Println("║                     C E T A K                      ║")
+	fmt.Println("╠════════════════════════════════════════════════════╣")
+	fmt.Println("║      1. Tampilkan Semua Data Transaksi             ║")
+	fmt.Println("║      2. Tampilkan Data Transaksi Terurut Menurun   ║")
+	fmt.Println("║      3. Tampilkan Data Transaksi Terurut Menaik    ║")
+	fmt.Println("║      4. Kembali ke Menu Utama                      ║")
+	fmt.Println("╚════════════════════════════════════════════════════╝")
+	fmt.Print("Pilih (1/2/3/4)? ")
 }
 
 // fungsi untuk mencetak header dan footer tabel
@@ -126,12 +161,16 @@ func cetak(A dataTransaksi, i int) {
 // fungsi untuk mencetak semua data transaksi
 func cetakData(A dataTransaksi, jumlahData int) {
 	clearScreen()
-	headingTable()
-	for i := 0; i < jumlahData; i++ {
-		cetak(A, i)
+	if A[0] == (data{}) {
+		fmt.Println("\033[31mTidak ada data untuk ditampilkan\033[0m")
+	} else {
+		headingTable()
+		for i := 0; i < jumlahData; i++ {
+			cetak(A, i)
+		}
+		cetakTotalNilaiTransaksi(A, jumlahData)
+		footerTable()
 	}
-	cetakTotalNilaiTransaksi(A, jumlahData)
-	footerTable()
 	jeda()
 	fmt.Println()
 }
@@ -151,6 +190,11 @@ func totalNilaiTransaksi(A dataTransaksi, jumlahData int) int {
 		total = total + A[i].totalHarga
 	}
 	return total
+}
+
+// belum beres
+func terurutMenurun(A dataTransaksi, jumlahData int) {
+	clearScreen()
 }
 
 // Fungsi untuk mencari data transaksi berdasarkan ID transaksi atau nama barang
@@ -189,7 +233,7 @@ func menuSearch() {
 func cariIdTransaksi(A *dataTransaksi, jumlahData, i *int) {
 	var n string
 
-	fmt.Print("Masukan ID Transaksi (contoh: KOP0001): ")
+	fmt.Print("Masukan ID Transaksi (contoh: KOP01): ")
 	fmt.Scan(&n)
 
 	ketemu := false
@@ -245,7 +289,7 @@ func cariNamaBarang(A *dataTransaksi, jumlahData *int) {
 				fmt.Println("\033[32mData ditemukan..\033[0m")
 				headingTable()
 			}
-			cetak(*A, *jumlahData)
+			cetak(*A, i)
 			ketemu = true
 		}
 	}
