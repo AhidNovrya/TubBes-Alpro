@@ -112,8 +112,6 @@ func baca(A *dataTransaksi, jumlahData *int) {
 // Fungsi untuk menampilkan menu cetak
 func cetakMenu(A dataTransaksi, jumlahData int) {
 	var pilihan int
-	menuCetak()
-	fmt.Scan(&pilihan)
 	for pilihan < 4 {
 		clearScreen()
 		menuCetak()
@@ -192,9 +190,75 @@ func totalNilaiTransaksi(A dataTransaksi, jumlahData int) int {
 	return total
 }
 
-// belum beres
+func menuKriteriaSort() int {
+	var kriteria int
+	fmt.Println("Urut berdasarkan:")
+	fmt.Println("1. Jumlah")
+	fmt.Println("2. Total Harga")
+	fmt.Print("Pilih (1/2): ")
+	fmt.Scan(&kriteria)
+	return kriteria
+}
+
+// Fungsi untuk mengurutkan data transaksi secara menurun
+// Fungsi ini menggunakan insertion sort untuk mengurutkan data berdasarkan kriteria yang dipilih
 func terurutMenurun(A dataTransaksi, jumlahData int) {
 	clearScreen()
+	if jumlahData == 0 {
+		fmt.Println("\033[31mTidak ada data untuk ditampilkan\033[0m")
+		jeda()
+	} else {
+		var B dataTransaksi
+		B = A
+		kriteria := menuKriteriaSort()
+		insertionSortDesc(&B, jumlahData, kriteria)
+
+		fmt.Println("\033[32mData terurut menurun:\033[0m")
+		cetakData(B, jumlahData)
+	}
+}
+
+func insertionSortDesc(A *dataTransaksi, jumlahData int, kriteria int) {
+	for i := 1; i < jumlahData; i++ {
+		key := A[i]
+		j := i - 1
+		for j >= 0 && ((kriteria == 1 && A[j].jumlah < key.jumlah) || (kriteria == 2 && A[j].totalHarga < key.totalHarga)) {
+			A[j+1] = A[j]
+			j--
+		}
+		A[j+1] = key
+	}
+}
+
+// Fungsi untuk mengurutkan data transaksi secara menaik
+// Fungsi ini menggunakan selection sort untuk mengurutkan data berdasarkan kriteria yang dipilih
+func terurutMenaik(A dataTransaksi, jumlahData int) {
+	clearScreen()
+	if jumlahData == 0 {
+		fmt.Println("\033[31mTidak ada data untuk ditampilkan\033[0m")
+		jeda()
+	} else {
+		var B dataTransaksi
+		B = A
+		kriteria := menuKriteriaSort()
+		selectionSort(&B, jumlahData, kriteria)
+
+		fmt.Println("\033[32mData terurut menaik:\033[0m")
+		cetakData(B, jumlahData)
+	}
+}
+
+func selectionSort(A *dataTransaksi, jumlahData int, kriteria int) {
+	for i := 0; i < jumlahData-1; i++ {
+		minIdx := i
+		for j := i + 1; j < jumlahData; j++ {
+			if (kriteria == 1 && A[j].jumlah < A[minIdx].jumlah) ||
+				(kriteria == 2 && A[j].totalHarga < A[minIdx].totalHarga) {
+				minIdx = j
+			}
+		}
+		A[i], A[minIdx] = A[minIdx], A[i]
+	}
 }
 
 // Fungsi untuk mencari data transaksi berdasarkan ID transaksi atau nama barang
