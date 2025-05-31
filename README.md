@@ -8,7 +8,8 @@ Aplikasi ini digunakan untuk mencatat dan mengelola transaksi pada sebuah kopera
 
 ## Dibuat Oleh
 
-- [Nama Kamu] (main coder)
+- Ahid Novryan (main coder)
+- Fergie Alpandi Pramadhani
 
 ## Spesifikasi
 
