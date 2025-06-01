@@ -53,10 +53,10 @@ Program ditulis menggunakan bahasa Go, dan menampilkan antarmuka berbasis teks (
 ## 🚀 Cara Menjalankan
 
 ### 📦 Opsi 1: Menjalankan dari File `.exe` (Windows)
-1. Buka folder tempat file `koperasiv2.exe` disimpan.
-2. Klik dua kali file `koperasiv2.exe`, atau buka via CMD:
+1. Buka folder tempat file `koperasi.exe` disimpan.
+2. Klik dua kali file `koperasi.exe`, atau buka via CMD:
    ```cmd
-   koperasiv2.exe
+   koperasi.exe
    ```
 3. Aplikasi akan berjalan di terminal/command prompt.
 
@@ -64,10 +64,10 @@ Program ditulis menggunakan bahasa Go, dan menampilkan antarmuka berbasis teks (
 
 ### 🛠️ Opsi 2: Menjalankan dari Source Code `.go`
 1. Pastikan sudah menginstal Go: https://golang.org/dl/
-2. Simpan file sebagai `koperasiv2.go`
+2. Simpan file sebagai `koperasi.go`
 3. Jalankan lewat terminal:
    ```bash
-   go run koperasiv2.go
+   go run koperasi.go
    ```
 
 ## 💡 Ide Pengembangan Selanjutnya
