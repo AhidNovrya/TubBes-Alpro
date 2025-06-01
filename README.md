@@ -70,12 +70,6 @@ Program ditulis menggunakan bahasa Go, dan menampilkan antarmuka berbasis teks (
    go run koperasi.go
    ```
 
-## 💡 Ide Pengembangan Selanjutnya
-- Simpan dan baca data dari file (CSV/TXT)
-- Fitur anggota koperasi (login/registrasi)
-- Dashboard laporan koperasi
-- Export ke PDF atau Excel
-
 ## 📚 Materi Algoritma yang Diimplementasikan
 - Struct array
 - Sorting:

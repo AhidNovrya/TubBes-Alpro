@@ -1,0 +1,16 @@
+- Contoh data jual beli
+Pulpen 10 25000
+Buku_Tulis 5 50000
+Penghapus 15 22500
+Pensil 12 30000
+Lem_Kertas 7 21000
+0 0 0
+
+- Contoh data simpan pinjam
+raditya pinjam 10000
+deriko simpan 23000
+feruis simpan 30000
+bariwil pinjam 50000
+anisa pinjam 12000
+kopera simpan 32000
+0 0 0
