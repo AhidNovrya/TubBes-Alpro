@@ -1,67 +1,81 @@
 
-# Aplikasi Manajemen Transaksi Koperasi
+# Aplikasi Manajemen Koperasi - Jual Beli & Simpan Pinjam
+
 Tugas Besar Mata Kuliah Algoritma dan Pemrograman.
 
-## Deskripsi Aplikasi
+## 📌 Deskripsi Aplikasi
 
-Aplikasi ini digunakan untuk mencatat dan mengelola transaksi pada sebuah koperasi. Data yang diolah meliputi ID transaksi, nama barang, jumlah, dan total harga. Aplikasi ini juga dilengkapi fitur pencarian, pengurutan, pengeditan, dan penghapusan data.
+Aplikasi koperasi berbasis terminal yang menyediakan dua jenis layanan utama:
+1. **Koperasi Jual Beli**: Mencatat dan mengelola transaksi pembelian barang.
+2. **Koperasi Simpan Pinjam**: Mencatat transaksi simpan dan pinjam dari anggota.
 
-## Dibuat Oleh
+Program ditulis menggunakan bahasa Go, dan menampilkan antarmuka berbasis teks (TUI).
 
-- Ahid Novryan (main coder)
+## 👨‍💻 Dibuat Oleh
+- Ahid Novryan
 - Fergie Alpandi Pramadhani
 
-## Spesifikasi
+## 🧩 Fitur Utama
 
-- a. Pengguna dapat memasukkan data transaksi sebanyak maksimal 100 data.
-- b. ID transaksi akan dibuat otomatis berdasarkan urutan input (format: KOP01, KOP02, ...).
-- c. Pengguna dapat mencetak semua data atau mencetak data yang telah diurutkan.
-- d. Pencarian data dapat dilakukan berdasarkan:
-  - ID Transaksi (Binary Search)
-  - Nama Barang (Sequential Search)
-- e. Data dapat diurutkan berdasarkan:
-  - Jumlah barang
-  - Total harga
-- f. Metode pengurutan:
-  - Ascending: Selection Sort
-  - Descending: Insertion Sort
-- g. Data dapat diedit atau dihapus secara individual.
-- h. Tersedia opsi untuk menghapus seluruh data (reset).
+### 🔷 Koperasi Jual Beli
+- Input data transaksi jual beli (barang, jumlah, total harga)
+- ID transaksi otomatis (format: `KJB01`, `KJB02`, dst.)
+- Tampilkan data semua transaksi
+- Pencarian transaksi:
+  - Berdasarkan ID (Binary Search)
+  - Berdasarkan nama barang (Sequential Search)
+- Edit, hapus, dan reset data
+- Sorting data:
+  - Berdasarkan jumlah atau total harga
+  - Ascending (Selection Sort)
+  - Descending (Insertion Sort)
 
-## Extra
+### 🔷 Koperasi Simpan Pinjam
+- Input data simpan atau pinjam anggota
+- ID transaksi otomatis (format: `KSP01`, `KSP02`, dst.)
+- Validasi input hanya menerima "simpan" atau "pinjam"
+- Tampilkan data transaksi
+- Tampilkan total simpan dan total pinjam
+- Pencarian transaksi:
+  - Berdasarkan ID (Binary Search)
+  - Berdasarkan nama pelaku (Sequential Search)
+- Sorting data:
+  - Berdasarkan nama pelaku atau total transaksi
+  - Ascending (Selection Sort)
+  - Descending (Insertion Sort)
+- Edit, hapus, dan reset data
 
-- Clear console untuk tampilan bersih
-- Navigasi menu berbasis angka
-- Tampilan tabel ASCII yang rapi
-- Validasi input jumlah dan total harga
-- Pemberian warna pada teks (jika terminal mendukung)
+## 📊 Tampilan Terminal
+- Tabel ASCII rapi untuk jual beli dan simpan pinjam
+- Tampilan berwarna untuk notifikasi sukses/gagal
+- Clear screen dan jeda untuk pengalaman pengguna yang nyaman
 
-## Patch 1.0
+## 🚀 Cara Menjalankan
 
-- Implementasi menu utama menggunakan tampilan teks interaktif
-- Penambahan fitur input, cetak, pencarian, edit, hapus, dan reset data
-- Penggunaan struct dan array statis untuk menyimpan data transaksi
-- Format tabel ASCII untuk menampilkan data
+1. Pastikan sudah menginstal Go: https://golang.org/dl/
+2. Simpan file sebagai `koperasiv2.go`
+3. Jalankan lewat terminal:
+```bash
+go run koperasiv2.go
+```
 
-## Patch 1.1
+## 💡 Ide Pengembangan Selanjutnya
+- Simpan dan baca data dari file (CSV/TXT)
+- Fitur anggota koperasi (login/registrasi)
+- Dashboard laporan koperasi
+- Export ke PDF atau Excel
 
-- Menambahkan fitur sorting:
-  - Selection Sort (ascending)
-  - Insertion Sort (descending)
-- Fitur sorting terintegrasi dengan menu cetak
-- Menu modular untuk memilih kriteria pengurutan
-- Sorting dilakukan pada salinan data agar binary search tetap berfungsi
-- Penanganan kondisi jika data kosong
+## 📚 Materi Algoritma yang Diimplementasikan
+- Struct array
+- Sorting:
+  - Selection Sort
+  - Insertion Sort
+- Searching:
+  - Binary Search
+  - Sequential Search
+- Modular function design
+- Validasi dan manipulasi data interaktif
 
-## Patch 1.2
+## 🪪 Lisensi
 
-- Peningkatan validasi input
-- Menambahkan jeda agar pengguna bisa membaca output sebelum kembali ke menu
-- Penyederhanaan dan modularisasi fungsi (seperti menu cetak dan menu kriteria sort)
-- Tampilan konsisten dan user-friendly
-
-## Patch 1.3
-
-- Penyesuaian agar sesuai dengan aturan dosen (tanpa `return` pada fungsi void-style)
-- Perbaikan minor untuk alur cetak data setelah sorting
-- Struktur kode lebih bersih dan mudah dikembangkan
+Proyek ini dibuat untuk keperluan pembelajaran dan tugas kuliah. Silakan gunakan, modifikasi, dan kembangkan sesuai kebutuhanmu.
