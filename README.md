@@ -52,12 +52,23 @@ Program ditulis menggunakan bahasa Go, dan menampilkan antarmuka berbasis teks (
 
 ## 🚀 Cara Menjalankan
 
+### 📦 Opsi 1: Menjalankan dari File `.exe` (Windows)
+1. Buka folder tempat file `koperasiv2.exe` disimpan.
+2. Klik dua kali file `koperasiv2.exe`, atau buka via CMD:
+   ```cmd
+   koperasiv2.exe
+   ```
+3. Aplikasi akan berjalan di terminal/command prompt.
+
+> Pastikan file `.exe` tidak dipindahkan dari folder yang memiliki dependensi tambahan (jika ada).
+
+### 🛠️ Opsi 2: Menjalankan dari Source Code `.go`
 1. Pastikan sudah menginstal Go: https://golang.org/dl/
 2. Simpan file sebagai `koperasiv2.go`
 3. Jalankan lewat terminal:
-```bash
-go run koperasiv2.go
-```
+   ```bash
+   go run koperasiv2.go
+   ```
 
 ## 💡 Ide Pengembangan Selanjutnya
 - Simpan dan baca data dari file (CSV/TXT)
@@ -76,6 +87,3 @@ go run koperasiv2.go
 - Modular function design
 - Validasi dan manipulasi data interaktif
 
-## 🪪 Lisensi
-
-Proyek ini dibuat untuk keperluan pembelajaran dan tugas kuliah. Silakan gunakan, modifikasi, dan kembangkan sesuai kebutuhanmu.
