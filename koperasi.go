@@ -415,11 +415,13 @@ func editData(A *dataTransaksi, jumlahData, idx *int) {
 	if *idx > -1 {
 		fmt.Println("Silakan edit data")
 		fmt.Scan(&namaBarang, &jumlah, &totalHarga)
-		if konfirmasi() == true {
+		if konfirmasi() == true && (jumlah > 0 && totalHarga > 0) {
 			A[*idx].namaBarang = namaBarang
 			A[*idx].jumlah = jumlah
 			A[*idx].totalHarga = totalHarga
 			fmt.Printf("\033[32mData ke %d sudah berhasil di edit\n\033[0m", *idx+1)
+		} else {
+			fmt.Println("\033[31mJumlah dan total harga tidak boleh kurang dari 0\033[0m")
 		}
 	}
 	jeda()
@@ -812,11 +814,13 @@ func editDataSP(B *simpanPinjamTransaksi, jumlahData, idx *int) {
 	if *idx > -1 {
 		fmt.Println("Silakan edit data")
 		fmt.Scan(&namaPelaku, &status, &totalTransaksi)
-		if konfirmasi() == true {
+		if konfirmasi() == true && (status == "simpan" || status == "pinjam") && totalTransaksi > 0 {
 			B[*idx].namaPelaku = namaPelaku
 			B[*idx].status = status
 			B[*idx].totalTransaksi = totalTransaksi
 			fmt.Printf("\033[32mData ke %d sudah berhasil di edit\n\033[0m", *idx+1)
+		} else {
+			fmt.Println("\033[31mStatus harus 'simpan' atau 'pinjam' dan total transaksi harus > 0\033[0m")
 		}
 	}
 	jeda()
