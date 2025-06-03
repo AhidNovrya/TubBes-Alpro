@@ -523,7 +523,7 @@ func bacaSP(B *simpanPinjamTransaksi, jumlahData *int) {
 	var totalTransaksi int
 	var stop bool = false
 	fmt.Println("Silakan masukan 0 0 0 jika ingin berhenti")
-	fmt.Println("Nama barang | Status | Total Harga")
+	fmt.Println("Nama pelaku | Status | Total Harga")
 	for !stop {
 		fmt.Scan(&namaPelaku, &status, &totalTransaksi)
 		if namaPelaku == "0" && status == "0" && totalTransaksi == 0 {
