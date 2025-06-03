@@ -133,7 +133,7 @@ func baca(A *dataTransaksi, jumlahData *int) {
 		fmt.Scan(&namaBarang, &jumlah, &totalHarga)
 		if namaBarang == "0" && jumlah == 0 && totalHarga == 0 {
 			stop = true
-		} else if jumlah > 0 || totalHarga > 0 {
+		} else if jumlah > 0 && totalHarga > 0 {
 			A[*jumlahData].idTransaksi = fmt.Sprintf("KJB%02d", *jumlahData+1) // penginputan id transaksi dilakukan secara otomatis
 			A[*jumlahData].namaBarang = namaBarang
 			A[*jumlahData].jumlah = jumlah
